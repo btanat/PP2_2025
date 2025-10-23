@@ -1,3 +1,21 @@
-x = int(1)   # x will be 1
-y = int(2.8) # y will be 2
-z = int("3") # z will be 3
+import math
+import time
+
+num = int(input("num:"))
+ttime = int(input("time:"))
+
+time.sleep(ttime / 1000)
+result = math.sqrt(num)
+print(f"{result} after {ttime} miliseconds")
+
+
+import time
+import math
+
+num = int(input())
+milliseconds = int(input())
+
+time.sleep(milliseconds / 1000)
+result = math.sqrt(num)
+
+print(f"Square root of {num} after {milliseconds} miliseconds is {result}")
