@@ -1,34 +1,47 @@
-import os
+import pygame
 
-path = input("Enter path: ")
+def init():
+    icon = pygame.image.load("images/icon.png")
+    pygame.display.set_icon(icon)
 
-print("Directories:")
-print([d for d in os.listdir(path) if os.path.isdir(os.path.join(path, d))])
+pygame.init()
+init()
 
-print("Files:")
-print([f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))])
+screen = pygame.display.set_mode((1000, 500))
+background = pygame.image.load("images/background.png")
+rocket = pygame.image.load("images/rocket.png")
+rocket = pygame.transform.scale(rocket, (50, 50))
+background = pygame.transform.scale(background, (1000, 500))
 
-print("All:")
-print(os.listdir(path))
+screen.blit(background, (0, 0))
+
+x = 475
+y = 450
 
 
-path = input("Введите путь к папке: ")
+cnt = 0
+while True:
+    if cnt % 100 == 0:
+        print(cnt)
+    screen.fill((0, 0, 0))
+    screen.blit(background, (0, 0))
+    screen.blit(rocket, (y, x))
+    pygame.display.update()
+    events = pygame.event.get()
+    for event in events:
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                y -= 10
+            if event.key == pygame.K_RIGHT:
+                y += 10
+            if event.key == pygame.K_UP:
+                x -= 10
+                x = max(0, x)
+            if event.key == pygame.K_DOWN:
+                x += 10
+                x = min(500, x)
+            if event.key == pygame.K_ESCAPE:
+                exit(0)
+            
 
-print("Список папок:")
-dirs = []
-for name in os.listdir(path):
-    if os.path.isdir(os.path.join(path, name)):
-        dirs.append(name)
-print(dirs)
-
-print("Список файлов:")
-files = []
-for name in os.listdir(path):
-    if os.path.isfile(os.path.join(path, name)):
-        files.append(name)
-print(files)
-
-print("Все файлы и папки:")
-all_items = os.listdir(path)
-print(all_items)
-
+    cnt += 1
